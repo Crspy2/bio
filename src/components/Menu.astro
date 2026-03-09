@@ -1,0 +1,253 @@
+---
+interface Props {
+  discordUserId?: string
+}
+
+const { discordUserId } = Astro.props
+
+const LINKS = [
+  { title: "crspy.me", href: "https://crspy.me" },
+  { title: "alterasms.io", href: "https://alterasms.io" },
+  { title: "forum.klar.gg", href: "https://forum.klar.gg" },
+]
+
+const SOCIAL_CTAS = [
+  {
+    href: `https://discord.com/users/${discordUserId ?? ''}`,
+    label: "Discord",
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1569 2.4189z"/></svg>`,
+  },
+  {
+    href: "https://github.com/crspy2",
+    label: "GitHub",
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`,
+  },
+  {
+    href: "https://t.me/crs_py",
+    label: "Telegram",
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>`,
+  },
+]
+---
+
+<!-- Underlay -->
+<div
+  data-menu-underlay
+  class="fixed z-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-500 shadow-lg shadow-blue-800/20"
+  style="top: 16px; right: 16px; width: 80px; height: 80px;"
+></div>
+
+<!-- Hamburger Button -->
+<button
+  data-menu-button
+  class="group fixed right-4 top-4 z-50 h-20 w-20 bg-white/0 transition-all hover:bg-white/20 rounded-xl"
+>
+  <span data-menu-bar="top" class="absolute block h-1 w-10 bg-white" style="top: 35%; left: 50%; transform: translate(-50%, -50%);"></span>
+  <span data-menu-bar="middle" class="absolute block h-1 w-10 bg-white" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></span>
+  <span data-menu-bar="bottom" class="absolute block h-1 w-5 bg-white" style="bottom: 35%; left: calc(50% + 10px); transform: translate(-50%, 50%);"></span>
+</button>
+
+<!-- Nav Overlay -->
+<nav data-menu-overlay class="fixed right-4 top-4 z-40 h-[calc(100dvh_-_32px)] w-[calc(100%_-_32px)] overflow-hidden pointer-events-none opacity-0">
+  <div class="flex flex-col items-start space-y-4 p-12 pl-4 md:pl-20">
+    {LINKS.map((l, idx) => (
+      <a
+        data-menu-link
+        data-index={idx}
+        href={l.href}
+        class="block text-5xl font-semibold text-blue-400 transition-colors hover:text-blue-50 md:text-7xl opacity-0"
+        style="transform: translateY(-8px);"
+      >
+        {l.title}
+      </a>
+    ))}
+  </div>
+
+  <div class="absolute bottom-6 left-6 flex gap-4 md:flex-col">
+    {SOCIAL_CTAS.map((l, idx) => (
+      <a
+        data-menu-social
+        data-index={idx}
+        target="_blank"
+        href={l.href}
+        class="text-xl 2xl:text-3xl text-white transition-colors hover:text-blue-300 opacity-0 [&>svg]:size-[1em]"
+        style="transform: translateY(-8px);"
+        set:html={l.icon}
+      />
+    ))}
+  </div>
+
+  <a
+    href="mailto:crspy8687@gmail.com"
+    data-menu-contact
+    class="absolute bottom-2 right-2 flex items-center gap-2 rounded-full bg-blue-700 px-3 py-3 text-4xl uppercase text-blue-200 transition-colors hover:bg-white hover:text-blue-600 md:bottom-4 md:right-4 md:px-6 md:text-2xl opacity-0"
+    style="transform: translateY(8px);"
+  >
+    <span class="hidden md:block">contact me</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-[1em]"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</nav>
+
+<script>
+  import gsap from 'gsap'
+
+  const button = document.querySelector('[data-menu-button]') as HTMLButtonElement
+  const underlay = document.querySelector('[data-menu-underlay]') as HTMLDivElement
+  const overlay = document.querySelector('[data-menu-overlay]') as HTMLElement
+  const barTop = document.querySelector('[data-menu-bar="top"]') as HTMLSpanElement
+  const barMiddle = document.querySelector('[data-menu-bar="middle"]') as HTMLSpanElement
+  const barBottom = document.querySelector('[data-menu-bar="bottom"]') as HTMLSpanElement
+  const links = document.querySelectorAll('[data-menu-link]')
+  const socials = document.querySelectorAll('[data-menu-social]')
+  const contact = document.querySelector('[data-menu-contact]') as HTMLElement
+
+  let active = false
+  let openTl: gsap.core.Timeline | null = null
+
+  function openMenu() {
+    // Kill any running timeline
+    if (openTl) openTl.kill()
+
+    button.classList.remove('rounded-xl')
+    button.classList.add('rounded-bl-xl', 'rounded-tr-xl')
+
+    // Show overlay immediately
+    gsap.set(overlay, { opacity: 1, pointerEvents: 'auto' })
+
+    openTl = gsap.timeline()
+
+    // Underlay expansion
+    openTl.to(underlay, {
+      width: 'calc(100% - 32px)',
+      height: 'calc(100dvh - 32px)',
+      duration: 0.8,
+      ease: 'elastic.out(0.5, 0.5)',
+    }, 0)
+
+    // Hamburger bars → X
+    openTl.to(barTop, {
+      keyframes: [
+        { top: '50%', duration: 0.15 },
+        { rotation: 45, duration: 0.15 },
+      ],
+    }, 0)
+    openTl.to(barMiddle, {
+      keyframes: [
+        { duration: 0.15 },
+        { rotation: -45, duration: 0.15 },
+      ],
+    }, 0)
+    openTl.to(barBottom, {
+      keyframes: [
+        { bottom: '50%', left: '50%', duration: 0.15 },
+        { rotation: 45, duration: 0.15 },
+      ],
+    }, 0)
+
+    // Nav links stagger
+    links.forEach((link, idx) => {
+      openTl!.to(link, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      }, 0.75 + idx * 0.125)
+    })
+
+    // Social CTAs stagger
+    socials.forEach((social, idx) => {
+      openTl!.to(social, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      }, 1 + idx * 0.125)
+    })
+
+    // Contact button
+    openTl.to(contact, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    }, 1.125)
+  }
+
+  function closeMenu() {
+    if (openTl) openTl.kill()
+
+    button.classList.add('rounded-xl')
+    button.classList.remove('rounded-bl-xl', 'rounded-tr-xl')
+
+    const closeTl = gsap.timeline()
+
+    // Fade out links, socials, contact
+    closeTl.to(links, {
+      opacity: 0,
+      y: -8,
+      duration: 0.3,
+      ease: 'power2.inOut',
+    }, 0)
+    closeTl.to(socials, {
+      opacity: 0,
+      y: -8,
+      duration: 0.3,
+      ease: 'power2.inOut',
+    }, 0)
+    closeTl.to(contact, {
+      opacity: 0,
+      y: 8,
+      duration: 0.3,
+      ease: 'power2.inOut',
+    }, 0)
+
+    // Hamburger bars → lines
+    closeTl.to(barTop, {
+      keyframes: [
+        { rotation: 0, duration: 0.15 },
+        { top: '35%', duration: 0.15 },
+      ],
+    }, 0)
+    closeTl.to(barMiddle, {
+      keyframes: [
+        { rotation: 0, duration: 0.15 },
+      ],
+    }, 0)
+    closeTl.to(barBottom, {
+      keyframes: [
+        { rotation: 0, duration: 0.15 },
+        { bottom: '35%', left: 'calc(50% + 10px)', duration: 0.15 },
+      ],
+    }, 0)
+
+    // Underlay collapse (delayed)
+    closeTl.to(underlay, {
+      width: '80px',
+      height: '80px',
+      duration: 0.8,
+      ease: 'elastic.out(0.5, 0.5)',
+    }, 0.75)
+
+    // Hide overlay after underlay collapses
+    closeTl.set(overlay, { opacity: 0, pointerEvents: 'none' }, 1.55)
+  }
+
+  button.addEventListener('click', () => {
+    active = !active
+    if (active) {
+      openMenu()
+    } else {
+      closeMenu()
+    }
+  })
+
+  // Close menu when clicking a nav link
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (active) {
+        active = false
+        closeMenu()
+      }
+    })
+  })
+</script>
