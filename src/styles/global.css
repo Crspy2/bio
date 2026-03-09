@@ -33,6 +33,15 @@
   @apply bg-slate-950;
 }
 
+@media (pointer: fine) {
+  *,
+  *::-webkit-scrollbar,
+  *::-webkit-scrollbar-thumb,
+  *::-webkit-scrollbar-track {
+    cursor: none !important;
+  }
+}
+
 button {
   @apply cursor-pointer;
 }

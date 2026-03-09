@@ -26,11 +26,11 @@ import LinkButton from '@/components/ui/LinkButton.astro'
         <p>I'm a fullstack web developer exploring complex software systems through experimentation and iterative development.</p>
         <ul class="mt-2 space-y-1.5 list-none pl-0">
           <li class="flex items-center gap-2">
-            <Image src={klarLogo} alt="Klar" width={128} height={128} class="size-5 rounded" />
+            <Image src={klarLogo} alt="Klar" width={128} height={128} class="size-6 rounded" />
             <span><span class="font-bold text-fuchsia-400 selection:bg-fuchsia-400 selection:text-white">Staff Manager</span> @ <LinkPreview url="https://klar.gg" client:visible>klar.gg</LinkPreview></span>
           </li>
           <li class="flex items-center gap-2">
-            <Image src={alteraLogo} alt="AlteraSMS" width={128} height={128} class="size-5 rounded" />
+            <Image src={alteraLogo} alt="AlteraSMS" width={128} height={128} class="size-6 rounded" />
             <span><span class="font-bold text-teal-400 selection:bg-teal-400 selection:text-white">Developer</span> @ <LinkPreview url="https://alterasms.io" client:visible>alterasms.io</LinkPreview></span>
           </li>
         </ul>
@@ -42,22 +42,3 @@ import LinkButton from '@/components/ui/LinkButton.astro'
     </div>
   </div>
 </div>
-
-<script>
-  import gsap from 'gsap'
-
-  gsap.from('[data-gsap="hero"]', {
-    scale: 0.5,
-    opacity: 0,
-    duration: 0.6,
-    ease: 'power2.out',
-  })
-
-  gsap.from('[data-gsap="bio"]', {
-    scale: 0.5,
-    opacity: 0,
-    duration: 0.6,
-    delay: 0.1,
-    ease: 'power2.out',
-  })
-</script>
