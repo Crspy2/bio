@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets'
+import klarLogo from '@/assets/logos/klar.png'
+import alteraLogo from '@/assets/logos/altera.png'
 import LinkPreview from '@/components/ui/LinkPreview.tsx'
 import GitHubGraph from '@/components/GitHubGraph.tsx'
 import DiscordCard from '@/components/DiscordCard.astro'
@@ -8,25 +11,30 @@ import LinkButton from '@/components/ui/LinkButton.astro'
 <div class="h-screen flex flex-col items-center justify-center gap-y-5 overflow-hidden">
   <div class="relative flex flex-col gap-y-5 bg-gray-900 py-4 sm:p-8 rounded-lg border border-slate-300/20">
     <div class="flex flex-col gap-y-4 justify-center items-center">
-      <div data-gsap="hero" class="flex flex-col sm:flex-row gap-x-6">
+      <div data-gsap="hero" class="flex flex-col items-center gap-y-3">
         <img
           alt="Avatar"
           draggable="false"
           loading="lazy"
           decoding="async"
-          class="bg-transparent rounded-full size-40 sm:size-30 mx-auto"
+          class="bg-transparent rounded-full size-24"
           src="https://cdn.discordapp.com/avatars/385568884511473664/d888e0052b5a6b7a8399cd81b4dc251f.webp?size=128"
         />
-        <div class="flex flex-col text-center sm:text-start">
-          <h3 class="font-moranga font-normal text-lg sm:text-xl lg:text-2xl text-blue-400">Computer Science Student</h3>
-          <h1 class="font-moranga text-white font-black text-3xl sm:text-4xl md:text-5xl text-nowrap">Hi, I'm Crspy!</h1>
-          <h4 class="text-gray-400 text-sm">Developer / Support</h4>
-        </div>
+        <h1 class="font-moranga text-white font-black text-3xl sm:text-4xl md:text-5xl text-nowrap">Hi, I'm Crspy!</h1>
       </div>
-      <p data-gsap="bio" class="text-neutral-200 font-inter text-center sm:text-start text-sm md:text-base w-full sm:w-135">
-        Founder and developer for{" "}
-        <LinkPreview url="https://alterasms.io" client:visible>AlteraSMS</LinkPreview>. I am a developer interested in fullstack development, authentication, video game mods, and more...
-      </p>
+      <div data-gsap="bio" class="text-neutral-200 font-inter text-center sm:text-start text-sm md:text-base w-full sm:w-135">
+        <p>I'm a fullstack web developer exploring complex software systems through experimentation and iterative development.</p>
+        <ul class="mt-2 space-y-1.5 list-none pl-0">
+          <li class="flex items-center gap-2">
+            <Image src={klarLogo} alt="Klar" width={128} height={128} class="size-5 rounded" />
+            <span><span class="font-bold text-fuchsia-400 selection:bg-fuchsia-400 selection:text-white">Staff Manager</span> @ <LinkPreview url="https://klar.gg" client:visible>klar.gg</LinkPreview></span>
+          </li>
+          <li class="flex items-center gap-2">
+            <Image src={alteraLogo} alt="AlteraSMS" width={128} height={128} class="size-5 rounded" />
+            <span><span class="font-bold text-teal-400 selection:bg-teal-400 selection:text-white">Developer</span> @ <LinkPreview url="https://alterasms.io" client:visible>alterasms.io</LinkPreview></span>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="flex flex-col items-center justify-center gap-4 w-full sm:w-135">
       <GitHubGraph client:only="react" />
