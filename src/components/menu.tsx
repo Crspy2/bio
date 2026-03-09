@@ -5,26 +5,28 @@ import { SiDiscord, SiGithub, SiTelegram } from "react-icons/si"
 import { FiArrowRight } from "react-icons/fi"
 import { cn } from "@/lib/utils"
 
-export default function Menu() {
+export default function Menu({ discordUserId }: { discordUserId?: string }) {
   const [active, setActive] = useState(false)
 
   return (
     <>
       <HamburgerButton active={active} setActive={setActive} />
-      <AnimatePresence>{active && <LinksOverlay setActive={setActive} />}</AnimatePresence>
+      <AnimatePresence>{active && <LinksOverlay setActive={setActive} discordUserId={discordUserId} />}</AnimatePresence>
     </>
   )
 }
 
 const LinksOverlay = memo(({
-   setActive
+   setActive,
+   discordUserId,
  }: {
   setActive: Dispatch<SetStateAction<boolean>>
+  discordUserId?: string
 }) => {
   return (
     <nav className="fixed right-4 top-4 z-40 h-[calc(100dvh_-_32px)] w-[calc(100%_-_32px)] overflow-hidden">
       <LinksContainer setActive={setActive} />
-      <FooterCTAs />
+      <FooterCTAs discordUserId={discordUserId} />
     </nav>
   )
 })
@@ -75,7 +77,7 @@ const NavLink = memo(({
       onClick={onClick}
       className="block text-5xl font-semibold text-blue-400 transition-colors hover:text-blue-50 md:text-7xl"
     >
-      {children}.
+      {children}
     </motion.a>
   )
 })
@@ -125,11 +127,12 @@ const HamburgerButton = memo(({
   )
 })
 
-const FooterCTAs = () => {
+const FooterCTAs = ({ discordUserId }: { discordUserId?: string }) => {
+  const socialCtas = getSocialCtas(discordUserId)
   return (
     <>
       <div className="absolute bottom-6 left-6 flex gap-4 md:flex-col">
-        {SOCIAL_CTAS.map((l, idx) => {
+        {socialCtas.map((l, idx) => {
           return (
             <motion.a
               key={idx}
@@ -175,15 +178,19 @@ const FooterCTAs = () => {
 
 const LINKS = [
   {
-    title: "alterasms",
+    title: "crspy.me",
+    href: "https://crspy.me"
+  },
+  {
+    title: "alterasms.io",
     href: "https://alterasms.io"
   },
 ]
 
-const SOCIAL_CTAS = [
+const getSocialCtas = (discordUserId?: string) => [
   {
     Component: SiDiscord,
-    href: "https://discord.com/users/1323519785694265356",
+    href: `https://discord.com/users/${discordUserId ?? ''}`,
   },
   {
     Component: SiGithub,
