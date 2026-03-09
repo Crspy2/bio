@@ -1,10 +1,11 @@
-import { Dispatch, memo, ReactNode, SetStateAction, useState } from "react"
+import { memo, useState } from "react"
+import type { Dispatch, ReactNode, SetStateAction } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { SiDiscord, SiGithub, SiTelegram } from "react-icons/si"
 import { FiArrowRight } from "react-icons/fi"
 import { cn } from "@/lib/utils"
 
-export const Menu = memo(() => {
+export default function Menu() {
   const [active, setActive] = useState(false)
 
   return (
@@ -13,7 +14,7 @@ export const Menu = memo(() => {
       <AnimatePresence>{active && <LinksOverlay setActive={setActive} />}</AnimatePresence>
     </>
   )
-})
+}
 
 const LinksOverlay = memo(({
    setActive

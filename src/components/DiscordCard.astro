@@ -1,0 +1,96 @@
+---
+import LinkButton from '@/components/ui/LinkButton.astro'
+
+const DISCORD_USER_ID = import.meta.env.DISCORD_USER_ID || '1323519785694265356'
+
+// Fallback values
+let displayName = 'Crspy'
+let username = 'crs_py'
+let avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_USER_ID}/08d0274d95b7bb20d32d5b71ec009194.webp?size=128`
+let status: 'online' | 'idle' | 'dnd' | 'offline' = 'offline'
+let badges: { id: string; description: string; icon: string; link: string }[] = []
+
+try {
+  // Fetch presence from Lanyard
+  const lanyardRes = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`)
+  if (lanyardRes.ok) {
+    const json = await lanyardRes.json()
+    const data = json.data
+    if (data) {
+      displayName = data.discord_user.global_name || data.discord_user.username
+      username = data.discord_user.username
+      status = data.discord_status || 'offline'
+      const avatarHash = data.discord_user.avatar
+      if (avatarHash) {
+        avatarUrl = `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${avatarHash}.webp?size=128`
+      }
+    }
+  }
+
+  // Fetch badges from dstn.to
+  const profileRes = await fetch(`https://dcdn.dstn.to/profile/${DISCORD_USER_ID}`)
+  if (profileRes.ok) {
+    const profile = await profileRes.json()
+    if (profile.badges) {
+      badges = profile.badges
+    }
+  }
+} catch {
+  // Use fallback values
+}
+
+const statusColors: Record<string, string> = {
+  online: 'bg-green-500',
+  idle: 'bg-yellow-500',
+  dnd: 'bg-red-500',
+  offline: 'bg-gray-500',
+}
+
+const statusColor = statusColors[status] || statusColors.offline
+---
+
+<div class="bg-zinc-800/50 py-2.5 px-3 rounded-2xl backdrop-blur-sm w-full">
+  <div class="flex items-center gap-4 w-full">
+    <div class="relative -m-2">
+      <div class="relative m-2 aspect-square h-16 sm:h-20">
+        <img
+          alt="Avatar"
+          draggable="false"
+          loading="lazy"
+          width="78"
+          height="78"
+          decoding="async"
+          class="size-full bg-transparent rounded-lg"
+          src={avatarUrl}
+        />
+        <span class="absolute bottom-0 right-0 z-10 -m-1 size-6">
+          <span class={`relative inline-flex size-6 rounded-full border-2 border-stone-800 ${statusColor}`}></span>
+        </span>
+      </div>
+    </div>
+    <div class="flex flex-row items-center justify-between gap-2 flex-1 min-w-0">
+      <div class="flex flex-row gap-3 items-center min-w-0">
+        <div class="min-w-0">
+          <h2 class="font-medium font-chillax leading-tight lg:text-lg text-white">{displayName}</h2>
+          <p class="text-zinc-400 text-xs lg:text-sm">@{username}</p>
+        </div>
+        {badges.length > 0 && (
+          <div class="hidden sm:flex flex-row gap-0.5 items-center">
+            {badges.map((badge) => (
+              <a href={badge.link} target="_blank" title={badge.description}>
+                <img
+                  src={`https://cdn.discordapp.com/badge-icons/${badge.icon}.png`}
+                  alt={badge.description}
+                  class="size-5"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+      <div class="w-40 shrink-0">
+        <LinkButton link={`https://discord.com/users/${DISCORD_USER_ID}`}>View Profile</LinkButton>
+      </div>
+    </div>
+  </div>
+</div>

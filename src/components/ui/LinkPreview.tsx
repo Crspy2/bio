@@ -1,13 +1,12 @@
-"use client"
-import { memo, MouseEvent, ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import type { ReactNode } from "react"
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
 import { encode } from "qss"
 import {
     AnimatePresence,
     motion,
-    useMotionValue,
-    useSpring,
 } from "framer-motion"
+import { LuExternalLink } from "react-icons/lu"
 import { cn } from "@/lib/utils"
 
 type LinkPreviewProps = {
@@ -23,7 +22,7 @@ type LinkPreviewProps = {
     | { isStatic?: false, imageSrc?: never }
     )
 
-export const LinkPreview = memo(({
+export default function LinkPreview({
                                 children,
                                 url,
                                 className,
@@ -31,7 +30,7 @@ export const LinkPreview = memo(({
                                 height = 125,
                                 isStatic = false,
                                 imageSrc = "",
-                            }: LinkPreviewProps) => {
+                            }: LinkPreviewProps) {
     let src
     if (!isStatic) {
         const params = encode({
@@ -58,18 +57,6 @@ export const LinkPreview = memo(({
         setIsMounted(true)
     }, [])
 
-    const springConfig = { stiffness: 100, damping: 15 }
-    const x = useMotionValue(0)
-
-    const translateX = useSpring(x, springConfig)
-
-    const handleMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
-        const targetRect = (event.target as HTMLElement).getBoundingClientRect()
-        const eventOffsetX = event.clientX - targetRect.left
-        const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2 // Reduce the effect to make it subtle
-        x.set(offsetFromCenter)
-    }
-
     return (
         <>
             {isMounted ? (
@@ -91,12 +78,12 @@ export const LinkPreview = memo(({
                 }}
             >
                 <HoverCardPrimitive.Trigger
-                    onMouseMove={handleMouseMove}
-                    className={cn("text-white font-bold underline underline-offset-2 hover:underline-offset-4 transition-all decoration-blue-500", className)}
+                    className={cn("group inline-flex items-center gap-1 text-white hover:text-blue-500 font-bold underline decoration-1 hover:decoration-2 underline-offset-2 hover:underline-offset-4 transition-all decoration-white hover:decoration-blue-500", className)}
                     href={url}
-                    target="_blanks"
+                    target="_blank"
                 >
                     {children}
+                    <LuExternalLink className="inline size-3.5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:text-blue-500" />
                 </HoverCardPrimitive.Trigger>
 
                 <HoverCardPrimitive.Content
@@ -121,9 +108,6 @@ export const LinkPreview = memo(({
                                 }}
                                 exit={{ opacity: 0, y: 20, scale: 0.6 }}
                                 className="shadow-xl rounded-xl"
-                                style={{
-                                    x: translateX,
-                                }}
                             >
                                 <a
                                     href={url}
@@ -146,4 +130,4 @@ export const LinkPreview = memo(({
             </HoverCardPrimitive.Root>
         </>
     )
-})
+}
