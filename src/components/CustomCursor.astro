@@ -8,7 +8,8 @@
   import gsap from "gsap";
 
   const isTouch = window.matchMedia("(pointer: coarse)").matches;
-  if (!isTouch) {
+  const isSmallScreen = window.matchMedia("(max-width: 639px)").matches;
+  if (!isTouch && !isSmallScreen) {
     const cursor = document.getElementById("custom-cursor")!;
 
     let state: "default" | "ibeam" | "morphed" = "default";
