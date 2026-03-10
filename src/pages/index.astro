@@ -1,0 +1,35 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import '@/styles/global.css'
+import Menu from '@/components/Menu.astro'
+import Intro from '@/components/Intro.astro'
+
+const DISCORD_USER_ID = import.meta.env.DISCORD_USER_ID
+---
+
+<Layout>
+  <div class="max-w-screen text-neutral-200">
+    <Menu discordUserId={DISCORD_USER_ID} />
+    <Intro />
+  </div>
+</Layout>
+
+<script>
+  const defaultTitle = "Crspy - bio.crspy.me"
+  const awayTitle = "Lonely tab"
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      timeoutId = setTimeout(() => {
+        document.title = awayTitle
+      }, 15000)
+    } else {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+        timeoutId = null
+      }
+      document.title = defaultTitle
+    }
+  })
+</script>

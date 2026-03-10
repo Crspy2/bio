@@ -25,3 +25,11 @@ dist-ssr
 
 # Million Lint
 .million
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Astro
+.astro

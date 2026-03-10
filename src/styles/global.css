@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Moranga";
+  src:local("Moranga-Black");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/moranga/Black.ttf");
+}
+
+@font-face {
+  font-family: "Moranga";
+  src:local("Moranga-Regular");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/moranga/Regular.ttf");
+}
+
+@font-face {
+  font-family: "Moranga";
+  src:local("Moranga-Light-Italic");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  src: url("../assets/fonts/moranga/Light-italic.ttf");
+}
+
+:root {
+  @apply bg-slate-950;
+}
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+*,
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-track {
+  scrollbar-width: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+.font-moranga {
+  @apply font-['Moranga']
+}
+
+.font-inter {
+  @apply font-['Inter']
+}
+
+.font-figtree {
+  @apply font-['Figtree']
+}
+
+

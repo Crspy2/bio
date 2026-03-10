@@ -4,42 +4,36 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "eslint ."
   },
   "dependencies": {
+    "@astrojs/react": "^4.2.1",
     "@radix-ui/react-hover-card": "^1.1.15",
     "@tailwindcss/vite": "^4.1.14",
-    "framer-motion": "^12.23.24",
-    "motion": "^12.23.24",
-    "prism-react-renderer": "^2.4.1",
+    "astro": "^5.7.10",
+    "clsx": "^2.1.1",
+    "gsap": "^3.12.7",
     "qss": "^3.0.0",
     "react": "^19.2.0",
-    "react-compiler-runtime": "^19.0.0-beta-27714ef-20250124",
     "react-dom": "^19.2.0",
     "react-github-calendar": "^4.5.11",
     "react-icons": "^5.5.0",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.14",
-    "vite-plugin-babel": "^1.3.2"
+    "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.27.1",
     "@eslint/js": "^9.37.0",
     "@types/node": "^24.7.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react-swc": "^4.1.0",
-    "babel-plugin-react-compiler": "^19.0.0-beta-27714ef-20250124",
     "eslint": "^9.37.0",
-    "eslint-plugin-react-compiler": "^19.1.0-rc.2",
     "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-react-refresh": "^0.4.23",
     "globals": "^16.4.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.1",
-    "vite": "^7.1.10"
+    "typescript-eslint": "^8.46.1"
   }
 }
