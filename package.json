@@ -10,10 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.1",
+    "@astrojs/react": "^5.0.1",
     "@radix-ui/react-hover-card": "^1.1.15",
     "@tailwindcss/vite": "^4.1.14",
-    "astro": "^5.7.10",
+    "astro": "^6.0.6",
     "clsx": "^2.1.1",
     "gsap": "^3.12.7",
     "qss": "^3.0.0",
